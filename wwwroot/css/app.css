@@ -4,7 +4,10 @@
     --cf-dark-color: #212121;
     --cf-light-color: #deeefb;
     --cf-font-size: 1.1rem;
-    
+
+    --cf-btn-homebg: hsl(60, 100%, 66%);
+    --cf-btn-homehover: hsl(60, 100%, 46%);
+    --cf-btn-homeactive: hsl(60, 100%, 36%);
 }
 
 html, body {
@@ -20,6 +23,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: var(--cf-title-font);
+}
+
+.btn-home {
+    --bs-btn-bg: var(--cf-btn-homebg);
+    --bs-btn-border-color: var(--cf-btn-homebg);
+    --bs-btn-hover-bg: var(--cf-btn-homehover);
+    --bs-btn-hover-border-color: var(--cf-btn-homehover);
+    --bs-btn-active-bg: var(--cf-btn-homeactive);
+    --bs-btn-active-border-color: var(--cf-btn-homeactive);
+    --bs-btn-disabled-bg: var(--cf-btn-homebg);
+    --bs-btn-disabled-border-color: var(--cf-btn-homebg);
+    --bs-btn-hover-color: var(--cf-dark-color);
+    color: var(--cf-dark-color);
 }
 
 #app {
