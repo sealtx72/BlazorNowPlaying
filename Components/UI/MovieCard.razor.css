@@ -1,0 +1,24 @@
+﻿.movieCard{
+    box-shadow: 0 4px 8px rgba(0,0,0,.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.movieCard:hover{
+    transform: scale(1.04);
+    z-index:99;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--cf-theme-600);
+    --bs-btn-border-color: var(--cf-theme-600);
+    --bs-btn-hover-bg: var(--cf-theme-700);
+    --bs-btn-hover-border-color: var(--cf-theme-700);
+    --bs-btn-active-bg: var(--cf-theme-800);
+    --bs-btn-active-border-color: var(--cf-theme-800);
+    --bs-btn-disabled-bg: var(--cf-theme-600);
+    --bs-btn-disabled-border-color: var(--cf-theme-600);
+}
+
+.movieCardFooter .btn{
+    font-size: .9rem;
+}
