@@ -1,20 +1,58 @@
-﻿<div class="movieCard card h-100">
-    <img src="/images/poster.png" alt="Movie Poster" class="card-mg-top" />
+﻿@inject FavoritesService FavoritesService
+
+<div class="movieCard card h-100">
+    <img src="@Movie.PosterPath" alt="Movie Poster" class="card-mg-top" />
     <div class="card-body border border-top">
         <div class="card-title fw-bold lh-1">
-            Movie Title
+            @Movie.Title
         </div>
-        <div class="card-text lh-1 fst-italic">
-            Release Date: Dec 01, 2026
+        <div class="card-text lh-1 fst-italic fs-6">
+            @{
+                var parsed = DateTime.TryParse(Movie.ReleaseDate, out var releaseDate);
+            }
+            Release Date:&nbsp;&nbsp;@(parsed? releaseDate.ToString("MMM dd, yyyy") : "Unknown")
         </div>
     </div>
     <div class="movieCardFooter card-footer d-flex justify-content-between">
-        <button class="btn btn-outline-primary">Add Fav</button>
-        <a href="moviedetail" class="btn btn-primary">More Info</a>
+        <button class="btn btn-outline-primary" @onclick="HandleToggleFavorite">
+            @(isFavorite ? "Remove Fav" : "Add Fav")
+        </button>
+        <a href="/movie/@Movie.Id" class="btn btn-primary">More Info</a>
     </div>
 </div>
 
 
 @code {
+    [Parameter, EditorRequired] public Movie? Movie { get; set; }
+    [Parameter] public EventCallback OnChange { get; set; }
+    bool isFavorite;
 
+    protected override async Task OnParametersSetAsync()
+    {
+        if(Movie is not null)
+        {
+            isFavorite = await FavoritesService.IsFavorite(Movie.Id);
+        }
+    }
+
+    private async Task HandleToggleFavorite()
+    {
+        if (Movie is null)
+        {
+            return;
+        }
+
+        if (isFavorite)
+        {
+            await FavoritesService.RemoveFavorite(Movie);
+            isFavorite = false;
+        }
+        else
+        {
+            await FavoritesService.AddFavorite(Movie);
+            isFavorite = true;
+        }
+
+        await OnChange.InvokeAsync();
+    }
 }
