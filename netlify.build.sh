@@ -21,10 +21,10 @@ popd >/dev/null
 # Use the installed dotnet binary explicitly to avoid picking up a different system/global SDK
 DOTNET_BIN="$INSTALL_DIR/dotnet"
 
-# Show info for debugging in Netlify logs
+# Show info for debugging in Netlify logs 
 "$DOTNET_BIN" --info
 
-# Ensure output dir exists (dotnet will create the wwwroot inside this)
+# Ensure output dir exists (dotnet will create the wwwroot inside this).
 mkdir -p "$OUTPUT_DIR"
 
 # Restore and publish the specific project using the installed dotnet
