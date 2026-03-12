@@ -1,5 +1,5 @@
 ﻿export default {
-    // Netlify config for routing
+    // Netlify config for routing requests to this function
     path: "/TMDB/*",  // This means any request to /TMDB/ will be handled here
 
     async handler(req) {
