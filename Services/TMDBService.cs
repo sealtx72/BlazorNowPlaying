@@ -21,13 +21,19 @@ namespace BlazorNowPlaying.Services
 
             if (!string.IsNullOrWhiteSpace(tmdbKey))
             {
+                _http.BaseAddress = new Uri("https://api.themoviedb.org/3/");
                 _http.DefaultRequestHeaders.Authorization = new("Bearer", tmdbKey);
+            }
+            else
+            {
+                //deployed to netlify
+                _http.BaseAddress = new Uri(_http.BaseAddress + "tmdb/");
             }
         }
 
         public async Task<MovieListResponse> GetNowPlayingMovies()
         {
-            string url = "https://api.themoviedb.org/3/movie/now_playing?region=US&language=en-US";
+            string url = "movie/now_playing?region=US&language=en-US";
 
             MovieListResponse response = await _http.GetFromJsonAsync<MovieListResponse>(url, _jsonOptions)
                 ?? throw new HttpIOException(HttpRequestError.InvalidResponse, "Now palying movies could not be loaded");
@@ -48,7 +54,7 @@ namespace BlazorNowPlaying.Services
 
         public async Task<MovieListResponse> GetPopularMovies()
         {
-            string url = "https://api.themoviedb.org/3/movie/popular?region=US&language=en-US";
+            string url = "movie/popular?region=US&language=en-US";
 
             MovieListResponse response = await _http.GetFromJsonAsync<MovieListResponse>(url, _jsonOptions)
                 ?? throw new HttpIOException(HttpRequestError.InvalidResponse, "Popular movies could not be loaded");
@@ -74,7 +80,7 @@ namespace BlazorNowPlaying.Services
         /// <exception cref="HttpIOException"></exception>
         public async Task<MovieListResponse> SearchMovies(string query)
         {
-            var url = $"https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US";
+            var url = $"search/movie?query={query}&include_adult=false&language=en-US";
 
             MovieListResponse response = await _http.GetFromJsonAsync<MovieListResponse>(url, _jsonOptions)
                 ?? throw new HttpIOException(HttpRequestError.InvalidResponse, "Search results could not be loaded");
@@ -95,7 +101,7 @@ namespace BlazorNowPlaying.Services
 
         public async Task<MovieDetails> GetMovieById(int movieId)
         {
-            var url = $"https://api.themoviedb.org/3/movie/{movieId}";
+            var url = $"movie/{movieId}";
 
             MovieDetails movie = await _http.GetFromJsonAsync<MovieDetails>(url, _jsonOptions)
                 ?? throw new HttpIOException(HttpRequestError.InvalidResponse, "Detail could not be loaded");
@@ -113,7 +119,7 @@ namespace BlazorNowPlaying.Services
 
         public async Task<Video?> GetMovieTrailer(int movieId)
         {
-            string url = $"https://api.themoviedb.org/3/movie/{movieId}/videos?language=en-US";
+            string url = $"movie/{movieId}/videos?language=en-US";
 
             var videos = await _http.GetFromJsonAsync<MovieVideosResponse>(url, _jsonOptions)
                 ?? throw new HttpIOException(HttpRequestError.InvalidResponse, "Could not retrieve movie videos");
@@ -125,7 +131,7 @@ namespace BlazorNowPlaying.Services
 
         public async Task<CreditsResponse> GetMovieCredits(int movieId)
         {
-            string url = $"https://api.themoviedb.org/3/movie/{movieId}/credits?language=en-US";
+            string url = $"movie/{movieId}/credits?language=en-US";
 
             var credits = await _http.GetFromJsonAsync<CreditsResponse>(url, _jsonOptions)
                 ?? throw new HttpIOException(HttpRequestError.InvalidResponse, "Could not retrieve movie credits");

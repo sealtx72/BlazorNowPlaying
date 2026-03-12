@@ -11,7 +11,7 @@ wget https://dot.net/v1/dotnet-install.sh
 chmod +x ./dotnet-install.sh
 
 # Install .NET 8 (modify channel if needed in the future)
-./dotnet-install.sh --channel 10.0
+./dotnet-install.sh --channel 10.0.4
 
 # Return to project directory
 popd
