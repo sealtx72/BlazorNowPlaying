@@ -1,5 +1,5 @@
 ﻿#!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 # Where we'll install the runtime/sdk
 INSTALL_DIR="$HOME/.dotnet"
