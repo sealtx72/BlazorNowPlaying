@@ -13,7 +13,7 @@
 html, body {
     font-family: var(--cf-body-font);
     font-size: var(--cf-font-size);
-    height: 100%;
+    height: max(100%, 1000px);
     min-height: 100vh;
 }
 
