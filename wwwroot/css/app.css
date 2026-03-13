@@ -4,7 +4,6 @@
     --cf-dark-color: #212121;
     --cf-light-color: #deeefb;
     --cf-font-size: 1.1rem;
-
     --cf-btn-homebg: hsl(60, 100%, 66%);
     --cf-btn-homehover: hsl(60, 100%, 46%);
     --cf-btn-homeactive: hsl(60, 100%, 36%);
@@ -13,7 +12,7 @@
 html, body {
     font-family: var(--cf-body-font);
     font-size: var(--cf-font-size);
-    height: max(100%, 1000px);
+    height: 100%;
     min-height: 100vh;
 }
 
@@ -50,7 +49,7 @@ h1:focus {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 .valid.modified:not([type=checkbox]) {
